@@ -27,6 +27,7 @@ jobs:
          run: |
             ls -R
             rm -rf build
+            cat /Users/runner/.ssh/known_hosts
        - name: Initialization and Fetching the Source Code
          run: |
             git config --global user.name "Nikhil Menghani"
