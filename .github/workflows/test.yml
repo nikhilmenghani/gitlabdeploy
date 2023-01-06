@@ -17,12 +17,13 @@ jobs:
     steps:
        - name: Checkout
          uses: actions/checkout@main
-
-       - name: Setup SSH Keys and known_hosts 
-         uses: webfactory/ssh-agent@v0.4.1
+       
+       - name: kielabokkie
+         uses: kielabokkie/ssh-key-and-known-hosts-action@v1
          with:
-             ssh-private-key: |
-                ${{ secrets.SSH_PRIVATE_KEY }}
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            ssh-host: gitlab.com
+
        - name: Environment Details and clean up
          run: |
             ls -R
