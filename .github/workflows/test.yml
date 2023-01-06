@@ -1,0 +1,35 @@
+name: Test SSH
+
+on:
+  push:
+      branches: [main]
+  workflow_dispatch:
+
+env:
+  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+  USER_NAME: 'Nikhil Menghani'
+  EMAIL: 'nikhil@menghani.com'
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+       - name: Checkout
+         uses: actions/checkout@main
+
+       - name: Setup SSH Keys and known_hosts 
+         uses: webfactory/ssh-agent@v0.4.1
+         with:
+             ssh-private-key: |
+                ${{ secrets.SSH_PRIVATE_KEY }}
+       - name: Environment Details and clean up
+         run: |
+            ls -R
+            rm -rf build
+       - name: Initialization and Fetching the Source Code
+         run: |
+            git config --global user.name "Nikhil Menghani"
+            git config --global user.email "nikhil@menghani.com"
+            git clone git@gitlab.com:nikhilmenghani/test.git
+            
